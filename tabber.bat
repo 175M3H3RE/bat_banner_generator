@@ -1,6 +1,6 @@
 @Echo Off
 echo. Banner Maker--------------==========
-CLS
+REM CLS
 set variable_0=
 set variable_1=
 set variable_2=
@@ -26,9 +26,7 @@ CALL set test=x%%variable_%wisdom%%%x
 if "%test%"=="xx" set /a spaces_%counter%=64&goto continue
 for /l %%i in (%counter%,1,%counter%) do  CALL CALL :SOMETHING "%%variable_%%i%%"
 if %bottom_line% GTR 65 echo. limit exceeds&echo.re-enter&goto repeat
-if %bottom_line% LSS 64 set /a spaces_%counter%=64-bottom_line
-if %bottom_line%==64 set /a spaces_%counter%=0
-if %bottom_line%==65 set /a spaces_%counter%=0
+if %bottom_line% LEQ 65 set /a spaces_%counter%=65-bottom_line
 
 :continue
 if %counter% LSS 2 goto looper
@@ -46,7 +44,7 @@ Exit /B
 echo. Making Banner.
 timeout 1 >NUL
 pause
-cls
+REM cls
 :1
 set shift=%1
 if "%shift%"=="pick" echo %echo1% >write.banner.code.bat
@@ -113,7 +111,7 @@ goto :eof
 setlocal enabledelayedexpansion
 set spaces=
 set number=%2
-if %number% NEQ 0 for /l %%i in (0,1,%number%) do set spaces= !spaces!
+if %number% NEQ 0 for /l %%i in (1,1,%number%) do set spaces= !spaces!
 set spaces=^^^|%~1!spaces!^^^|
 echo !spaces!
 REM echo ^|%~1%spaces%^|
@@ -122,7 +120,7 @@ Exit /B
 setlocal enabledelayedexpansion
 set spaces=
 set number=%2
-if %number% NEQ 0 for /l %%i in (0,1,%number%) do set spaces= !spaces!
+if %number% NEQ 0 for /l %%i in (1,1,%number%) do set spaces= !spaces!&echo. >NUL
 set spaces=^^^^^|%~1!spaces!^^^^^|
 echo echo.!spaces! >>write.banner.code.bat
 REM echo ^|%~1%spaces%^|
